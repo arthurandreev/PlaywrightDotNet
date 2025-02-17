@@ -14,9 +14,15 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
     - name: Build & Install
       run: dotnet build
+
+    - name: Install Playwright dependencies
+      run: npx playwright install-deps
+
     - name: Ensure browsers are installed
       run: pwsh bin/Debug/net8.0/playwright.ps1 install --with-deps
+
     - name: Run your tests
       run: dotnet test
